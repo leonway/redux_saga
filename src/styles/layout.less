@@ -1,0 +1,46 @@
+.app-header {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    .app-logo {
+        font-weight: normal;
+        margin: 0;
+        font-size: 0.32rem;
+    }
+    .ant-menu-horizontal {
+        border-bottom-width: 0;
+        .menu-item-selected {
+            color: var(--primary-color);
+        }
+        .ant-menu-item {
+            padding-left: 0.1rem;
+            padding-right: 0.1rem;
+        }
+    }
+    .app-nav > .ant-menu {
+        line-height: @header-height;
+        height: @header-height;
+    }
+    .app-nav {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        .user-avatar {
+            background-color: var(--primary-color);
+            cursor: pointer;
+        }
+    }
+}
+.app-page-content {
+    padding: 100px 0 @padding-base * 4;
+    word-break: break-word;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+.app-wrapper {
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 1396px;
+    width: 100%;
+    margin: 0 auto;
+}
