@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { LocaleProvider } from 'antd';
 import { Provider } from 'react-redux';
 import { store } from 'store/configureStore.js';
-// import Loading from '../components/Loading';
+import Loading from '../components/Loading';
 import a from 'styles/index.less';
 import { zhCN } from './i18n/zh-CN';
 // import BasicLayout from './LayoutContainer';
@@ -12,7 +12,7 @@ import { zhCN } from './i18n/zh-CN';
 console.log(Loading)
 const LoginPage = lazy(() => import('routes/login'));
 
-const Loading = ()=>(<div>loading...</div>)
+// const Loading = ()=>(<div>loading...</div>)
 const Container = () => (
     <Provider store={store}>
         <LocaleProvider locale={zhCN}>
