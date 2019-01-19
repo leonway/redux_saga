@@ -4,7 +4,7 @@ import { createReducer } from 'actionReducer/reducer';
 // import users from './users';
 // import counter from './counter';
 
-export default combineReducers({
+export default {
   auth: authReducer,
   layout: createReducer(['layout'])
-});
+};

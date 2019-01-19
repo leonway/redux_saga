@@ -28,6 +28,7 @@ const action = new Action(['layout']);
 // };
 
 const initActionCreator = () => {
+  // const { location } = this.props
   return action.create('init')
 };
 
@@ -66,7 +67,8 @@ const openChangeActionCreator = (key, openKeys) => {
 //   }
 // };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (...state) => {
+  console.log(state)
   return state.layout;
 };
 
@@ -76,8 +78,8 @@ const actionCreators = {
   // onMenuClick: menuClickActionCreator
 };
 
-const Container = connect(mapStateToProps, actionCreators)(EnhanceLoading((...ada)=>{
-  console.log(ada)
+const Container = connect(mapStateToProps, actionCreators)(EnhanceLoading((state)=>{
+  console.log(state)
   return <div>haha</div>
 }));
 export default Container;

@@ -1,23 +1,34 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers  } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import createBrowserHistory from 'history/createBrowserHistory';
 
 import rootReducers from '../reducers';
 import rootSagas from '../sagas';
 
+const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware(rootSagas);
 const loggerMiddleware = createLogger({
     collapsed: true,
     timestamp: false,
     level: 'info'
 });
-
+console.log(history,"rootReducers",rootReducers,"connectRouter",connectRouter(history))
 const configureStore = (initialState => {
     const store = createStore(
-        rootReducers,
+        combineReducers({...rootReducers,router:connectRouter(history)}),
+        // compose(
+        //     connectRouter(history),
+        //     combineReducers
+        // )({...rootReducers}),
         initialState,
         compose(
-            applyMiddleware(loggerMiddleware, sagaMiddleware),
+            applyMiddleware(
+            routerMiddleware(history),
+                sagaMiddleware,
+                loggerMiddleware
+                ),
             window.__REDUX_DEVTOOLS_EXTENSION__  ? window.__REDUX_DEVTOOLS_EXTENSION__ () : fn => fn
         )
     );
@@ -30,4 +41,4 @@ const configureStore = (initialState => {
     }
     return store;
 })();
-export { configureStore as store };
+export { configureStore as store, history };

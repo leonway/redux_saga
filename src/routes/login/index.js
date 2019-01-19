@@ -9,7 +9,10 @@ console.log(styles);
 
 @Form.create()
 @connect(
-    ({auth}) => ({ isloading: auth.isloading}),
+    (state) => {
+        console.log(state)
+        return {}
+    },
     { userLogin: userActions.userLogin }
 )
  class LoginPage extends React.PureComponent {

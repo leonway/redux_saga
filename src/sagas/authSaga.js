@@ -22,11 +22,12 @@ function* userLogin({ payload }) {
       if(error){
           return message.error(error);
       }
-      const payload = { status:"loading" }
+      const payload = { status:"page" }
+      
+      
 
       yield put(action.create('create',payload));
-
-
+      
         const { origin } = window.location;
         if (history) {
             history.push({ pathname: '/' });
