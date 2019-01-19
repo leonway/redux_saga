@@ -67,7 +67,7 @@ const openChangeActionCreator = (key, openKeys) => {
 //   }
 // };
 
-const mapStateToProps = (...state) => {
+const mapStateToProps = (state) => {
   console.log(state)
   return state.layout;
 };

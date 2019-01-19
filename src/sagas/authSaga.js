@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from 'redux-saga/effects';
+import { all, call, put, takeLatest,select } from 'redux-saga/effects';
 import { message } from 'antd';
 import types from 'constants/auth';
 import { login } from 'services/auth';
@@ -17,14 +17,11 @@ function* userLogin({ payload }) {
             type: types.userLoginSuccess,
             payload: {}
         });
-
-      const { error, authorTree, menus } = loginToData(rolePowerDics);
-      if(error){
-          return message.error(error);
-      }
-      const payload = { status:"page" }
-      
-      
+      const { authorTree, navItems, sidebars,openKeys } = loginToData(rolePowerDics);
+      const payload = { status:"loading",navItems, sidebars,openKeys }
+      const { router:{ location } } = yield select(_=>_)
+      payload.nav1 = location.pathname.split("/",3)[1];
+      payload.nav2 = location.pathname.split("/",3)[2];
 
       yield put(action.create('create',payload));
       
@@ -47,7 +44,6 @@ function* userLogin({ payload }) {
 
 function* userLogout() {
     try {
-        // yield call(AuthService.logout);
         yield put({ type: types.clearUserData });
     } catch (error) {
         yield put({ type: types.clearUserData });
